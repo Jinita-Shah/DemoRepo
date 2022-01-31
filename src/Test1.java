@@ -23,8 +23,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 public class Test1 {
 
-    public static final String USERNAME = "jinitashah_97KLWJ";
-    public static final String AUTOMATE_KEY = "yJhKXdJGTptoKyMPxX1x";
+    public static final String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
+    public static final String AUTOMATE_KEY =System.getenv("BROWSERSTACK_ACCESS_KEY");
+    public static final String buildname=System.getenv("BROWSERSTACK_BUILD_NAME");
+  //  public static final String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
+   // public static final String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);  // A pool of 2 threads are being created here. You can change this as per your parallel limit
@@ -37,7 +40,7 @@ public class Test1 {
                 capsHashtable.put("browser_version", "latest");
                 capsHashtable.put("os", "Windows");
                 capsHashtable.put("os_version", "11");
-                capsHashtable.put("build", "Amazon Webpage Test");
+                capsHashtable.put("build", buildname);
                 capsHashtable.put("name", "Thread 1");
                 obj1.executeTest(capsHashtable);
                 return "Task 1 completed";
