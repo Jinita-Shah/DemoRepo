@@ -26,7 +26,7 @@ public class Test1 {
     public static final String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
     public static final String AUTOMATE_KEY =System.getenv("BROWSERSTACK_ACCESS_KEY");
     public static final String buildname=System.getenv("BROWSERSTACK_BUILD_NAME");
-  //  public static final String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
+   public static final String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
     public static final String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
     public static void main(String[] args) throws InterruptedException, ExecutionException {
@@ -42,6 +42,8 @@ public class Test1 {
                 capsHashtable.put("os_version", "11");
                 capsHashtable.put("build", buildname);
                 capsHashtable.put("name", "Thread 1");
+                capsHashtable.put("browserstack.local", "browserstackLocal");
+                capsHashtable.put("browserstack.localIdentifier", "browserstackLocalIdentifier");
                 obj1.executeTest(capsHashtable);
                 return "Task 1 completed";
 
