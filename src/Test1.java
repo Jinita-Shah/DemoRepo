@@ -27,7 +27,7 @@ public class Test1 {
     public static final String AUTOMATE_KEY =System.getenv("BROWSERSTACK_ACCESS_KEY");
     public static final String buildname=System.getenv("BROWSERSTACK_BUILD_NAME");
   //  public static final String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
-   // public static final String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
+    public static final String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);  // A pool of 2 threads are being created here. You can change this as per your parallel limit
