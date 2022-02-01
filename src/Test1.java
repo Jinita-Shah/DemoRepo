@@ -1,5 +1,6 @@
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -49,11 +50,11 @@ public class Test1 {
         callables.add(new Callable<String>() {
             public String call() throws Exception {
                 Hashtable<String, String> capsHashtable = new Hashtable<String, String>();
-                capsHashtable.put("browser", "Edge");
-                capsHashtable.put("browser_version", "96.0");
+                capsHashtable.put("browser", "Firefox");
+                capsHashtable.put("browser_version", "95.0");
                 capsHashtable.put("os", "Windows");
-                capsHashtable.put("os_version", "11");
-                capsHashtable.put("build", "Amazon Webpage Test");
+                capsHashtable.put("os_version", "10");
+                capsHashtable.put("build", buildname);
                 capsHashtable.put("name", "Thread 2");
                 obj1.executeTest(capsHashtable);
                 return "Task 2 completed";
@@ -66,7 +67,7 @@ public class Test1 {
                 capsHashtable.put("browser_version", "latest");
                 capsHashtable.put("os", "OS X");
                 capsHashtable.put("os_version", "Big Sur");
-                capsHashtable.put("build", "Amazon Webpage Test");
+                capsHashtable.put("build", buildname);
                 capsHashtable.put("name", "Thread 3");
                 obj1.executeTest(capsHashtable);
                 return "Task 3 completed";
@@ -102,7 +103,6 @@ public void executeTest(Hashtable<String, String> capsHashtable) {
              driver.findElement(By.id("twotabsearchtextbox")).click();
              driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Iphone x");
              driver.findElement(By.id("twotabsearchtextbox")).sendKeys(Keys.ENTER);
-             System.out.println("page title = "+driver.getTitle());
              w.until(ExpectedConditions.titleContains("Iphone"));
              
              driver.findElement(By.id("a-autoid-0-announce")).click();
@@ -114,17 +114,17 @@ public void executeTest(Hashtable<String, String> capsHashtable) {
              driver.findElement(By.xpath("//ul[@aria-labelledby='p_n_operating_system_browse-bin-title']/li[@aria-label='iOS']"));
             
              List<WebElement> name = driver.findElements(By.xpath("//div[@class='sg-row']/div[2]/div/div/div/h2/a"));
-             System.out.println("name size= "+name.size());
-
+            
              List<WebElement> price= driver.findElements(By.xpath("//span[@class='a-price-whole']"));
-             System.out.println(price.size());
-
+            
              List<WebElement> link = driver.findElements(By.xpath("//div[@class='sg-row']/div[2]/div/div/div/h2/a"));
-
+             List<String> itemlist = new ArrayList<String>();
              for (int i = 0; i < price.size(); i++) {
                  String link_text = link.get(i).getAttribute("href");
-                 System.out.println(name.get(i).getText() + " " + price.get(i).getText() + " " + link_text);
+               //  System.out.println(name.get(i).getText() + " " + price.get(i).getText() + " " + link_text);
+                 itemlist.add(name.get(i).getText() + " " + price.get(i).getText() + " " + link_text);
              }
+             System.out.println(itemlist);
          } catch (Exception e) {
              jse.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"failed\", \"reason\": \"Some elements failed to load..\"}}");
          }
