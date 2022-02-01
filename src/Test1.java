@@ -26,8 +26,6 @@ public class Test1 {
     public static final String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
     public static final String AUTOMATE_KEY =System.getenv("BROWSERSTACK_ACCESS_KEY");
     public static final String buildname=System.getenv("BROWSERSTACK_BUILD_NAME");
-   public static final String browserstackLocal = System.getenv("BROWSERSTACK_LOCAL");
-    public static final String browserstackLocalIdentifier = System.getenv("BROWSERSTACK_LOCAL_IDENTIFIER");
     public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);  // A pool of 2 threads are being created here. You can change this as per your parallel limit
@@ -42,8 +40,6 @@ public class Test1 {
                 capsHashtable.put("os_version", "11");
                 capsHashtable.put("build", buildname);
                 capsHashtable.put("name", "Thread 1");
-                capsHashtable.put("browserstack.local", "browserstackLocal");
-                capsHashtable.put("browserstack.localIdentifier", "browserstackLocalIdentifier");
                 obj1.executeTest(capsHashtable);
                 return "Task 1 completed";
 
@@ -99,8 +95,6 @@ public void executeTest(Hashtable<String, String> capsHashtable) {
         final JavascriptExecutor jse = (JavascriptExecutor) driver;
         try {
         	 driver.get("https://www.amazon.in/");
-             System.out.println("after launch");
-             System.out.println(driver.getTitle());
              driver.manage().window().maximize();
              WebDriverWait w= new WebDriverWait(driver, 10);
                
@@ -110,25 +104,15 @@ public void executeTest(Hashtable<String, String> capsHashtable) {
              driver.findElement(By.id("twotabsearchtextbox")).sendKeys(Keys.ENTER);
              System.out.println("page title = "+driver.getTitle());
              w.until(ExpectedConditions.titleContains("Iphone"));
-             //w.until(ExpectedConditions.urlContains("iphone"));
              
              driver.findElement(By.id("a-autoid-0-announce")).click();
              driver.findElement(By.xpath("//div[@class='a-popover-inner']/ul/li[3]")).click();
-            
-             System.out.println("aa");
              WebElement element = driver.findElement(By.xpath("//span[@class='a-button-inner']/span/span[2]"));
-             //w.until(ExpectedConditions.textToBePresentInElement(element, "High to Low"));
              Thread.sleep(2000);
-             System.out.println("after");
              WebElement os=driver.findElement(By.xpath("//ul[@aria-labelledby='p_n_operating_system_browse-bin-title']/li[@aria-label='iOS']"));
-            System.out.println("jjj");
              w.until(ExpectedConditions.visibilityOf(os));
-             System.out.println("kk");
              driver.findElement(By.xpath("//ul[@aria-labelledby='p_n_operating_system_browse-bin-title']/li[@aria-label='iOS']"));
-             System.out.println("b");
-         
-             //System.out.println(driver.getTitle());
-
+            
              List<WebElement> name = driver.findElements(By.xpath("//div[@class='sg-row']/div[2]/div/div/div/h2/a"));
              System.out.println("name size= "+name.size());
 
